@@ -23,22 +23,24 @@ public class HttpRequest {
 
         Integer statusCode = response.getStatusLine().getStatusCode();
         Header contentLength = response.getFirstHeader(CONTENT_LENGTH);
-        Integer fileSize = Integer.valueOf(contentLength.getValue());
+        Long remoteFileSize = Long.valueOf(contentLength.getValue());
 
         HttpEntity httpEntity = response.getEntity();
 
         InputStream is = httpEntity.getContent();
+        Long localFileSize = 0L;
         try {
             int counter;
             byte[] buffer = new byte[1024];
             while ((counter = is.read(buffer)) != -1) {
                 out.write(buffer, 0, counter);
             }
+            localFileSize = out.length();
         } finally {
             close(out);
             close(is);
         }
-        return statusCode == 200 &&  out.length() == fileSize;
+        return statusCode == 200 &&  localFileSize.equals(remoteFileSize);
     }
 
     protected static void close(InputStream is) {
