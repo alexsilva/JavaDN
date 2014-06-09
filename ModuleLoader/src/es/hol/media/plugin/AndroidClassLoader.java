@@ -1,6 +1,8 @@
 package es.hol.media.plugin;
 
+import android.annotation.TargetApi;
 import android.content.Context;
+import android.os.Build;
 import dalvik.system.DexClassLoader;
 
 import java.io.File;
@@ -63,6 +65,7 @@ public class AndroidClassLoader {
         return jarFile.exists() && loaded;
     }
 
+    @TargetApi(Build.VERSION_CODES.CUPCAKE) // api 3+
     public Class<?> loadClass(String className) {
         String dexDir = ctx.getDir("dex", Context.MODE_PRIVATE).getAbsolutePath();
         DexClassLoader loader = new DexClassLoader(
