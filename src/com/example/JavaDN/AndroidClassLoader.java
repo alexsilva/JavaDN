@@ -6,6 +6,7 @@ import dalvik.system.DexClassLoader;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.RandomAccessFile;
 
 class AndroidClassLoader {
     /*
@@ -55,17 +56,13 @@ class AndroidClassLoader {
         mResUrl = resUrl;
     }
 
-    public void load() {
-        try {
-            File jarFile = getLibFile();
-
-            Log.e(TAG, "Created: " + jarFile.createNewFile());
-
-            HttpRequest.dump(mResUrl, new FileOutputStream(jarFile));
-        } catch (Exception e) {
-            Log.e(TAG, e.getMessage());
-
+    public boolean load() throws Exception {
+        File jarFile = getLibFile();
+        boolean loaded = false;
+        if (jarFile.createNewFile()) {
+            loaded = HttpRequest.dump(mResUrl, new RandomAccessFile(jarFile, "rw"));
         }
+        return jarFile.exists() && loaded;
     }
 
     public Class<?> loadClass(String className) {

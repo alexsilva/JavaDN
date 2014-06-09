@@ -1,26 +1,30 @@
 package com.example.JavaDN;
 
+import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
+import java.io.*;
 
 /**
  * HttpRequest: Dumps to OutputStream
  */
 public class HttpRequest {
+    public static final String CONTENT_LENGTH = "Content-Length";
 
-    public static void dump(String url, FileOutputStream out) throws Exception {
+    public static boolean dump(String url, RandomAccessFile out) throws Exception {
 
         DefaultHttpClient httpClient = new DefaultHttpClient();
         HttpGet httpGet = new HttpGet(url);
 
         HttpResponse response = httpClient.execute(httpGet);
+
+        Integer statusCode = response.getStatusLine().getStatusCode();
+        Header contentLength = response.getFirstHeader(CONTENT_LENGTH);
+        Integer fileSize = Integer.valueOf(contentLength.getValue());
+
         HttpEntity httpEntity = response.getEntity();
 
         InputStream is = httpEntity.getContent();
@@ -34,6 +38,7 @@ public class HttpRequest {
             close(out);
             close(is);
         }
+        return statusCode == 200 &&  out.length() == fileSize;
     }
 
     protected static void close(InputStream is) {
@@ -46,7 +51,7 @@ public class HttpRequest {
         }
     }
 
-    protected static void close(OutputStream out) {
+    protected static void close(RandomAccessFile out) {
         if (out != null) {
             try {
                 out.close();

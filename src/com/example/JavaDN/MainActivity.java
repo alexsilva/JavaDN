@@ -35,7 +35,12 @@ public class MainActivity extends Activity implements Runnable {
         });
 
         classLoader.add("https://dl.dropboxusercontent.com/u/67269258/lib_class.jar");
-        classLoader.load();
+
+        try {
+            classLoader.load();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         runOnUiThread(new Runnable() {
             @Override
