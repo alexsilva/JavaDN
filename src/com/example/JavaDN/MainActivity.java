@@ -8,6 +8,7 @@ import android.widget.TextView;
 public class MainActivity extends Activity implements Runnable {
 
     TextView log;
+
     AndroidClassLoader classLoader;
 
     /**
