@@ -54,8 +54,8 @@ public class AndroidClassLoader {
         return new File(baseFile, mLibName);
     }
 
-    public void setLib(String resUrl) {
-        setLib(resUrl, UrlUtils.getFileName(resUrl));
+    public void setLib(String libUrl) {
+        setLib(libUrl, UrlUtils.getFileName(libUrl));
     }
 
     public void setLib(String libUrl, String libName) {
