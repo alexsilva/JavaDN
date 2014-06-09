@@ -3,6 +3,7 @@ package es.hol.media.plugin;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.os.Build;
+import android.util.Log;
 import dalvik.system.DexClassLoader;
 
 import java.io.File;
@@ -80,7 +81,7 @@ public class AndroidClassLoader {
         try {
             klass = loader.loadClass(className);
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            Log.d(TAG, e.getMessage());
         }
         return klass;
     }
