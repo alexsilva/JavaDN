@@ -7,8 +7,6 @@ import dalvik.system.DexClassLoader;
 
 import java.io.File;
 import java.io.RandomAccessFile;
-import java.net.MalformedURLException;
-import java.net.URL;
 
 public class AndroidClassLoader {
     /*
@@ -55,8 +53,8 @@ public class AndroidClassLoader {
         return new File(baseFile, mLibName);
     }
 
-    public void setLib(String resUrl) throws MalformedURLException {
-        setLib(resUrl, new URL(resUrl).getFile());
+    public void setLib(String resUrl) {
+        setLib(resUrl, UrlUtils.getFileName(resUrl));
     }
 
     public void setLib(String libUrl, String libName) {
