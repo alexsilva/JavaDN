@@ -58,7 +58,7 @@ class AndroidClassLoader {
 
     public boolean load() throws Exception {
         File jarFile = getLibFile();
-        boolean loaded = false;
+        boolean loaded = jarFile.exists();
         if (jarFile.createNewFile()) {
             loaded = HttpRequest.dump(mResUrl, new RandomAccessFile(jarFile, "rw"));
         }
