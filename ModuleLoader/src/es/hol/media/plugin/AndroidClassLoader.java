@@ -1,11 +1,9 @@
-package com.example.JavaDN;
+package es.hol.media.plugin;
 
 import android.content.Context;
-import android.util.Log;
 import dalvik.system.DexClassLoader;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.RandomAccessFile;
 
 class AndroidClassLoader {

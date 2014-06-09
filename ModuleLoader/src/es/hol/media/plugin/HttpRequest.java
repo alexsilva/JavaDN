@@ -1,4 +1,4 @@
-package com.example.JavaDN;
+package es.hol.media.plugin;
 
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
@@ -6,7 +6,9 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.RandomAccessFile;
 
 /**
  * HttpRequest: Dumps to OutputStream
@@ -40,7 +42,7 @@ public class HttpRequest {
             close(out);
             close(is);
         }
-        return statusCode == 200 &&  localFileSize.equals(remoteFileSize);
+        return statusCode == 200 && localFileSize.equals(remoteFileSize);
     }
 
     protected static void close(InputStream is) {
