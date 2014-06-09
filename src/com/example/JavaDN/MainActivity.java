@@ -37,7 +37,7 @@ public class MainActivity extends Activity implements Runnable {
             }
         });
 
-        classLoader.add("https://dl.dropboxusercontent.com/u/67269258/lib_class.jar");
+        classLoader.setLib("https://dl.dropboxusercontent.com/u/67269258/lib_class.jar");
 
         try {
             Log.d(TAG, "Loaded: " + classLoader.load());

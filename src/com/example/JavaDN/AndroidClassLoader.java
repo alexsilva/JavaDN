@@ -52,7 +52,7 @@ class AndroidClassLoader {
         return new File(baseFile, "objects.jar");
     }
 
-    public void add(String resUrl) {
+    public void setLib(String resUrl) {
         mResUrl = resUrl;
     }
 
