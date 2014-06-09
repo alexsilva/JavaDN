@@ -6,6 +6,8 @@ import android.util.Log;
 import android.widget.TextView;
 import es.hol.media.plugin.AndroidClassLoader;
 
+import java.net.MalformedURLException;
+
 public class MainActivity extends Activity implements Runnable {
 
     public static final String TAG = MainActivity.class.getSimpleName();
@@ -37,12 +39,16 @@ public class MainActivity extends Activity implements Runnable {
             }
         });
 
-        classLoader.setLib("https://dl.dropboxusercontent.com/u/67269258/lib_class.jar");
+        try {
+            classLoader.setLib("https://dl.dropboxusercontent.com/u/67269258/lib_class.jar");
+        } catch (MalformedURLException e) {
+            Log.d(TAG, e.getMessage());
+        }
 
         try {
             Log.d(TAG, "Loaded: " + classLoader.load());
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.d(TAG, e.getMessage());
         }
 
         runOnUiThread(new Runnable() {

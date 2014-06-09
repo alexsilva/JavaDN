@@ -7,6 +7,8 @@ import dalvik.system.DexClassLoader;
 
 import java.io.File;
 import java.io.RandomAccessFile;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 public class AndroidClassLoader {
     /*
@@ -32,7 +34,8 @@ public class AndroidClassLoader {
     public static final String TAG = AndroidClassLoader.class.getSimpleName();
 
     Context ctx;
-    String mResUrl;
+    String mLibUrl;
+    String mLibName;
 
     public AndroidClassLoader() {
         super(); // system
@@ -49,18 +52,23 @@ public class AndroidClassLoader {
     public File getLibFile() {
         File baseFile = new File(getLibPath());
         baseFile.mkdirs();
-        return new File(baseFile, "objects.jar");
+        return new File(baseFile, mLibName);
     }
 
-    public void setLib(String resUrl) {
-        mResUrl = resUrl;
+    public void setLib(String resUrl) throws MalformedURLException {
+        setLib(resUrl, new URL(resUrl).getFile());
+    }
+
+    public void setLib(String libUrl, String libName) {
+        mLibName = libName;
+        mLibUrl = libUrl;
     }
 
     public boolean load() throws Exception {
         File jarFile = getLibFile();
         boolean loaded = jarFile.exists();
         if (jarFile.createNewFile()) {
-            loaded = HttpRequest.dump(mResUrl, new RandomAccessFile(jarFile, "rw"));
+            loaded = HttpRequest.dump(mLibUrl, new RandomAccessFile(jarFile, "rw"));
         }
         return jarFile.exists() && loaded;
     }
