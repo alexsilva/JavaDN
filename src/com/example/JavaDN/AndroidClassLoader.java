@@ -69,7 +69,7 @@ class AndroidClassLoader {
     }
 
     public Class<?> loadClass(String className) {
-        String dexDir = ctx.getDir("dex", 0).getAbsolutePath();
+        String dexDir = ctx.getDir("dex", Context.MODE_PRIVATE).getAbsolutePath();
         DexClassLoader loader = new DexClassLoader(
                 getLibFile().getAbsolutePath(), dexDir, null, ctx.getClassLoader());
         Class<?> klass = null;
