@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
-
+import es.hol.media.plugin.AndroidClassLoader;
 
 public class MainActivity extends Activity implements Runnable {
 

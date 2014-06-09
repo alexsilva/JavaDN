@@ -6,7 +6,7 @@ import dalvik.system.DexClassLoader;
 import java.io.File;
 import java.io.RandomAccessFile;
 
-class AndroidClassLoader {
+public class AndroidClassLoader {
     /*
     * http://stackoverflow.com/questions/11453614/how-can-i-load-a-jar-file-dynamically-in-an-android-application-4-0-3#
     * http://larshamren.blogspot.com.br/2012/02/android-dynamically-loading-classes.html
